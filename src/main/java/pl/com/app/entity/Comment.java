@@ -1,4 +1,7 @@
 package pl.com.app.entity;
 
-public class Comment {
+public class Comment extends Common {
+
+
+
 }

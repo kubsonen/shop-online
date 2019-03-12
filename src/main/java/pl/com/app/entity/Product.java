@@ -1,19 +1,32 @@
 package pl.com.app.entity;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "product")
 public class Product extends Common{
 
+    @Column(name = "product_code")
     private String productCode;
 
+    @Column(name = "product_name")
     private String productName;
 
+    @Column(name = "price")
     private BigDecimal price;
 
+    @ManyToMany
+    @JoinTable(name = "product_image",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "image_id"))
     private Image image;
 
+    @Column(name = "description")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public String getProductCode() {
