@@ -6,14 +6,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
+                    <a class="nav-link" href="/category">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Basket</a>
+                    <a class="nav-link" href="/basket">Basket</a>
                 </li>
             </ul>
         </div>

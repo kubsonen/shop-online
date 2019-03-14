@@ -1,20 +1,38 @@
 package pl.com.app.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "category")
 public class Category extends Common{
 
+    @NotEmpty
+    @Column(name = "acronym")
+    private String acronym;
+
+    @NotEmpty
     @Column(name = "name")
     private String name;
 
+    @NotEmpty
     @Column(name = "description")
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category parent;
+
+    @Transient
+    private String parentId;
+
+    public String getAcronym() {
+        return acronym;
+    }
+
+    public void setAcronym(String acronym) {
+        this.acronym = acronym;
+    }
 
     public String getName() {
         return name;
@@ -38,5 +56,13 @@ public class Category extends Common{
 
     public void setParent(Category parent) {
         this.parent = parent;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 }

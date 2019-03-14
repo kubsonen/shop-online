@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "order")
+@Table(name = "shop_order")
 public class Order extends Common {
 
     @Column(name = "order_number")

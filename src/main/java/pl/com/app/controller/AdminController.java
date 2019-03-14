@@ -1,19 +1,21 @@
 package pl.com.app.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @author JNartowicz
+ */
 @Controller
-@RequestMapping(value = IndexController.INDEX_PATH)
-public class IndexController {
+@RequestMapping(value = AdminController.ADMIN_PATH)
+public class AdminController {
 
-    public static final String INDEX_PATH = "/";
+    public static final String ADMIN_PATH = "/admin";
 
     @GetMapping
-    public String showIndex(Model model){
-        return "index";
+    private String showAdmin(){
+        return "admin";
     }
 
 }

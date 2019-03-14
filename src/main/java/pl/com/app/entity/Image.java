@@ -8,6 +8,12 @@ import javax.persistence.Table;
 @Table(name = "image")
 public class Image extends Common {
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "server_path")
     private String serverPath;
 

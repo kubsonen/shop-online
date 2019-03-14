@@ -2,6 +2,7 @@ package pl.com.app.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -20,7 +21,7 @@ public class Product extends Common{
     @JoinTable(name = "product_image",
         joinColumns = @JoinColumn(name = "product_id"),
         inverseJoinColumns = @JoinColumn(name = "image_id"))
-    private Image image;
+    private Set<Image> image;
 
     @Column(name = "description")
     private String description;
@@ -53,11 +54,11 @@ public class Product extends Common{
         this.price = price;
     }
 
-    public Image getImage() {
+    public Set<Image> getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(Set<Image> image) {
         this.image = image;
     }
 
