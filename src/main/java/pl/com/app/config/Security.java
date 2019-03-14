@@ -39,10 +39,10 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
+        http.csrf().disable().
                 authorizeRequests().
                 antMatchers(IndexController.INDEX_PATH).permitAll().
-                antMatchers(CategoryController.CATEGORY_PATH + "/**").permitAll().
+                antMatchers(CategoryController.CATEGORY_PATH).permitAll().
                 antMatchers("/css/**", "/js/**", "/favicon.ico").permitAll().
                 anyRequest().authenticated().and().formLogin();
     }

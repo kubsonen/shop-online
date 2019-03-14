@@ -69,39 +69,7 @@
             <br>
 
             <#if adminLogged?? && adminLogged == true>
-
-                <h1 class="my-4">
-                    <small>Add category</small>
-                </h1>
-                <form class="mb-3" method="POST" action="category/add" id="parentId" name="parentId">
-                    <input type="hidden" id="custId" name="custId" value="${parentId}">
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="acronym">Acronym</label>
-                            <input type="text" class="form-control is-invalid" name="acronym" id="acronym" value="">
-                            <div class="invalid-feedback">
-                                Fail
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control is-invalid" name="name" id="name" value="">
-                            <div class="invalid-feedback">
-                                Fail
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <label for="description">Description</label>
-                            <input type="text" class="form-control is-invalid" name="description" id="description" value="">
-                            <div class="invalid-feedback">
-                                Fail
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Add category</button>
-                </form>
+                <a class="btn btn-primary mb-3" href="/category/form" role="button">Add category</a>
             </#if>
 
         </div>

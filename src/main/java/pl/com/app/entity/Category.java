@@ -7,15 +7,15 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "category")
 public class Category extends Common{
 
-    @NotEmpty
+    @NotEmpty(message = "Must be not empty.")
     @Column(name = "acronym")
     private String acronym;
 
-    @NotEmpty
+    @NotEmpty(message = "Must be not empty.")
     @Column(name = "name")
     private String name;
 
-    @NotEmpty
+    @NotEmpty(message = "Mus be not empty.")
     @Column(name = "description")
     private String description;
 
