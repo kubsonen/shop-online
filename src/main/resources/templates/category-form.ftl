@@ -34,39 +34,35 @@
                 <@spring.bind "category"/>
                 <form class="mb-3" method="POST" action="/category/form" id="category" >
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <@spring.formInput "category.acronym"/>
-                            <@spring.showErrors "<br>"/>
-                            <!--<label for="acronym">Acronym</label>-->
-                            <!--<input type="text" class="form-control is-invalid" name="acronym" id="acronym" value="">-->
-                            <div class="invalid-feedback">
-                                Fail
-                            </div>
+                        <div class="col-md-6">
+                            <label for="acronym">Acronym</label>
+                            <@spring.bind "category.acronym" />
+                            <input type="text" class="form-control" name="acronym" id="acronym" value="${spring.status.value?default("")}">
+                            <#list spring.status.errorMessages as error>
+                                <p class="text-danger">${error}</p>
+                            </#list>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <@spring.formInput "category.name"/>
-                            <@spring.showErrors "<br>"/>
-                            <!--<label for="name">Name</label>-->
-                            <!--<input type="text" class="form-control" name="name" id="name" value="">-->
-                            <div class="invalid-feedback">
-                                Fail
-                            </div>
+                        <div class="col-md-6">
+                            <@spring.bind "category.name" />
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name" id="name" value="${spring.status.value?default("")}">
+                            <#list spring.status.errorMessages as error>
+                                <p class="text-danger">${error}</p>
+                            </#list>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <@spring.formInput "category.description"/>
-                            <@spring.showErrors "<br>"/>
-                            <!--<label for="description">Description</label>-->
-                            <!--<input type="text" class="form-control" name="description" id="description" value="">-->
-                            <div class="invalid-feedback">
-                                Fail
-                            </div>
+                        <div class="col-md-12">
+                            <@spring.bind "category.description" />
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" name="description" id="description" value="${spring.status.value?default("")}">
+                            <#list spring.status.errorMessages as error>
+                                <p class="text-danger">${error}</p>
+                            </#list>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add category</button>
+                    <button type="submit" class="btn btn-primary my-3">Add category</button>
                 </form>
-
 
             </div>
 

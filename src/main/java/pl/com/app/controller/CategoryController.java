@@ -2,11 +2,14 @@ package pl.com.app.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.app.entity.Category;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = CategoryController.CATEGORY_PATH)
@@ -29,7 +32,12 @@ public class CategoryController {
     }
 
     @PostMapping(CATEGORY_FORM)
-    public String saveCategory(Category category){
+    public String saveCategory(@Valid Category category, BindingResult bindingResult, Model model){
+
+//        if(bindingResult.hasErrors()){
+//
+//        }
+        model.addAttribute("category", category);
         return "category-form";
     }
 
