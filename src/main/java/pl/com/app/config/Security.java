@@ -43,7 +43,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 authorizeRequests().
                 antMatchers(IndexController.INDEX_PATH).permitAll().
                 antMatchers(CategoryController.CATEGORY_PATH).permitAll().
-                antMatchers("/css/**", "/js/**", "/favicon.ico").permitAll().
+                antMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll().
                 anyRequest().authenticated().and().formLogin();
     }
 

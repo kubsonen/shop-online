@@ -70,6 +70,7 @@
 
             <#if adminLogged?? && adminLogged == true>
                 <a class="btn btn-primary mb-3" href="/category/form" role="button">Add category</a>
+                <a class="btn btn-primary mb-3" href="/category/import" role="button">Import categories</a>
             </#if>
 
         </div>

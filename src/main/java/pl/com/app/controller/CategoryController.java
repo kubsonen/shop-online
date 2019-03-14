@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.app.entity.Category;
+import pl.com.app.model.ImportModel;
 
 import javax.validation.Valid;
 
@@ -17,8 +18,10 @@ public class CategoryController {
 
     public static final String CATEGORY_PATH = "/category";
     public static final String CATEGORY_FORM = "/form";
+    public static final String CATEGORY_IMPORT = "/import";
     public static final String PARENT_ID_ATTRIBUTE = "parentId";
     public static final String CATEGORY_ACRONYM_ATTRIBUTE = "acronym";
+    public static final String IMPORT_ERROR = "importError";
 
     @GetMapping
     public String showCategory(Model model, @RequestParam(value = CATEGORY_ACRONYM_ATTRIBUTE, required = false) String acronym){
@@ -33,12 +36,19 @@ public class CategoryController {
 
     @PostMapping(CATEGORY_FORM)
     public String saveCategory(@Valid Category category, BindingResult bindingResult, Model model){
-
-//        if(bindingResult.hasErrors()){
-//
-//        }
         model.addAttribute("category", category);
         return "category-form";
+    }
+
+    @GetMapping(CATEGORY_IMPORT)
+    public String importCategories(Model model){
+        return "category-import";
+    }
+
+    @PostMapping(CATEGORY_IMPORT)
+    public String saveImport(ImportModel importModel, Model model){
+        model.addAttribute(IMPORT_ERROR, "Błąd.");
+        return "category-import";
     }
 
 }

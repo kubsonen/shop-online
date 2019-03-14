@@ -1,6 +1,14 @@
 <!-- Sidebar Widgets Column -->
 <div class="col-md-4">
 
+    <!-- Basket -->
+    <div class="card my-4">
+        <h5 class="card-header">Your basket</h5>
+        <div class="card-body">
+            <button class="btn btn-secondary w-100" type="button">Go to your basket</button>
+        </div>
+    </div>
+
     <!-- Search Widget -->
     <div class="card my-4">
         <h5 class="card-header">Search</h5>
