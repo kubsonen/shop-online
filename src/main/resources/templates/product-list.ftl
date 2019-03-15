@@ -27,8 +27,8 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-            <h1 class="my-4">Categories
-                <small>Find your product</small>
+            <h1 class="my-4">
+                <small>Browse products</small>
             </h1>
 
             <br>
@@ -39,20 +39,21 @@
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
+                        <th scope="col">Price</th>
                         <th scope="col">Description</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <#list categories as category>
+                    <#list products as product>
 
                         <tr>
-                            <td>${(category.name)!""}</td>
+                            <td>${(category.productName)!""}</td>
+                            <td>${(category.price)!""}</td>
                             <td>${(category.description)!""}</td>
                             <td>
-                                <a class="btn btn-primary" href="/category?acronym=${(category.acronym)!''}" role="button">Subcategory</a>
-                                <a class="btn btn-primary" href="/category/${(category.acronym)!''}" role="button">Products</a>
+                                <a class="btn btn-primary" href="#" role="button">Show</a>
                             </td>
                         </tr>
 
@@ -64,15 +65,9 @@
 
             </#if>
 
-            <#if adminLogged?? && adminLogged == true>
-                <a class="btn btn-primary my-3" href="/category/form" role="button">Add category</a>
-                <a class="btn btn-primary my-3" href="/category/import" role="button">Import categories</a>
-            </#if>
-
         </div>
 
-        <#include "/import/side-bar.ftl" >
-
+    <#include "/import/side-bar.ftl" >
     </div>
     <!-- /.row -->
 

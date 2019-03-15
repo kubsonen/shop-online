@@ -17,6 +17,8 @@
 
     <properties>
         <shop-mysql-driver>8.0.15</shop-mysql-driver>
+        <shop-commons-io>2.6</shop-commons-io>
+        <shop-commons-file-upload>1.3.1</shop-commons-file-upload>
     </properties>
     
     <dependencies>
@@ -44,6 +46,16 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${shop-mysql-driver}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${shop-commons-file-upload}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${shop-commons-io}</version>
         </dependency>
     </dependencies>
 

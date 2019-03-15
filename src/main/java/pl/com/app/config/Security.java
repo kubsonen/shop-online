@@ -42,7 +42,7 @@ public class Security extends WebSecurityConfigurerAdapter {
         http.csrf().disable().
                 authorizeRequests().
                 antMatchers(IndexController.INDEX_PATH).permitAll().
-                antMatchers(CategoryController.CATEGORY_PATH).permitAll().
+                antMatchers(CategoryController.CATEGORY_PATH, CategoryController.CATEGORY_PATH + "/*").permitAll().
                 antMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll().
                 anyRequest().authenticated().and().formLogin();
     }

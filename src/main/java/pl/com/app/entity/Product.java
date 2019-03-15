@@ -1,7 +1,10 @@
 package pl.com.app.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,6 +32,12 @@ public class Product extends Common{
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Transient
+    private String categoryId;
+
+    @Transient
+    private List<MultipartFile> tempFiles;
 
     public String getProductCode() {
         return productCode;
@@ -78,4 +87,19 @@ public class Product extends Common{
         this.category = category;
     }
 
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public List<MultipartFile> getTempFiles() {
+        return tempFiles;
+    }
+
+    public void setTempFiles(List<MultipartFile> tempFiles) {
+        this.tempFiles = tempFiles;
+    }
 }

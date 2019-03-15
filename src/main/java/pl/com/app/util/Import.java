@@ -8,13 +8,23 @@ import java.util.List;
  */
 public class Import {
 
-    public static List<String[]> getRowsDataFromText(int columnCount, char columnSeparator, char rowSeparator, String text){
+    public static List<String[]> getRowsDataFromText(int columnCount, char columnSeparator, char rowSeparator, String text) throws Exception {
 
         List<String[]> strings = new ArrayList<>();
+        String[] rows = text.split("" + rowSeparator);
 
-//        String[] rows = text.split(new String(rowSeparator));
+        for(String row: rows){
 
-        return null;
+            String[] columns = row.split("" + columnSeparator);
+            if(columns.length != columnCount){
+                throw new Exception("Incorrect column count.");
+            } else {
+                strings.add(columns);
+            }
+
+        }
+
+        return strings;
     }
 
 }

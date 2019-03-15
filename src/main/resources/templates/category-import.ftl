@@ -35,6 +35,11 @@
                     ${importError}
                 </div>
             </#if>
+            <#if importSuccess??>
+                <div class="alert alert-success" role="alert">
+                    ${importSuccess}
+                </div>
+            </#if>
 
             <form class="mb-3" method="POST" action="/category/import" id="category" >
                 <div class="form-group">

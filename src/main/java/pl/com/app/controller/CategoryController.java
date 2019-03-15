@@ -1,16 +1,20 @@
 package pl.com.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.com.app.annotation.InsertConstant;
+import pl.com.app.aspect.ConstantData;
 import pl.com.app.entity.Category;
+import pl.com.app.entity.Product;
 import pl.com.app.model.ImportModel;
+import pl.com.app.service.CategoryService;
+import pl.com.app.service.ProductService;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = CategoryController.CATEGORY_PATH)
@@ -19,12 +23,33 @@ public class CategoryController {
     public static final String CATEGORY_PATH = "/category";
     public static final String CATEGORY_FORM = "/form";
     public static final String CATEGORY_IMPORT = "/import";
-    public static final String PARENT_ID_ATTRIBUTE = "parentId";
     public static final String CATEGORY_ACRONYM_ATTRIBUTE = "acronym";
     public static final String IMPORT_ERROR = "importError";
+    public static final String IMPORT_SUCCESS = "importSuccess";
+
+    public static final String SHOW_CATEGORY_CATEGORIES = "categories";
+    public static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
+
+    public static final String SHOW_PRODUCTS_IN_CATEGORY = "products";
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping
     public String showCategory(Model model, @RequestParam(value = CATEGORY_ACRONYM_ATTRIBUTE, required = false) String acronym){
+
+        Category parent = null;
+        if(acronym != null){
+            parent = categoryService.getCategoryByAcronym(acronym);
+        }
+
+        Set<Category> categories = categoryService.getCategoriesByParent(parent);
+        model.addAttribute(SHOW_CATEGORY_CATEGORIES, categories);
+        model.addAttribute(SHOW_CATEGORY_CATEGORY_PARENT, parent);
+
         return "category";
     }
 
@@ -47,8 +72,36 @@ public class CategoryController {
 
     @PostMapping(CATEGORY_IMPORT)
     public String saveImport(ImportModel importModel, Model model){
-        model.addAttribute(IMPORT_ERROR, "Błąd.");
+
+        try{
+            categoryService.importCategories(importModel.getImportText());
+            model.addAttribute(IMPORT_SUCCESS, "Everything ok.");
+        } catch (Throwable t) {
+            t.printStackTrace();
+            model.addAttribute(IMPORT_ERROR, t.getMessage());
+        }
+
         return "category-import";
+    }
+
+    @GetMapping("/{categoryAcronym}")
+    public String showProductsInCategory(Model model,
+                                         @PathVariable("categoryAcronym") String categoryAcronym){
+
+        Category category = null;
+        try{
+            category = categoryService.getCategoryByAcronym(categoryAcronym);
+        } catch (Throwable t){
+            t.printStackTrace();
+        }
+
+
+        if(category != null){
+            Set<Product> products = productService.getProductsInCategory(category);
+            model.addAttribute(SHOW_PRODUCTS_IN_CATEGORY, products);
+        }
+
+        return "product-list";
     }
 
 }
