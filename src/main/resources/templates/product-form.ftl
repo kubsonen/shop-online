@@ -31,6 +31,17 @@
                 <small>Add product</small>
             </h1>
 
+            <#if productSaveFail??>
+                <div class="alert alert-danger" role="alert">
+                    ${productSaveFail}
+                </div>
+            </#if>
+            <#if productSaveSuccess??>
+                <div class="alert alert-success" role="alert">
+                    ${productSaveSuccess}
+                </div>
+            </#if>
+
             <@spring.bind "product"/>
             <form enctype="multipart/form-data" class="mb-3" method="POST" action="/product/form" id="product" >
                 <div class="form-row">
@@ -51,7 +62,7 @@
                         </#list>
                     </div>
                     <div class="col-md-4">
-                        <@spring.bind "product.category.id" />
+                        <@spring.bind "product.category" />
                         <label for="category">Category</label>
                         <select class="form-control" name="category" id="category" value="${spring.status.value?default(0)}">
                             <option value=""></option>
@@ -69,7 +80,7 @@
                     </div>
                     <div class="col-md-12 my-2">
                         <@spring.bind "product.description" />
-                        <label for="description">Paste your import text</label>
+                        <label for="description">Paste your product description</label>
                         <textarea class="form-control" id="description" name="description" rows="5">${spring.status.value?default("")}</textarea>
                         <#list spring.status.errorMessages as error>
                             <p class="text-danger">${error}</p>

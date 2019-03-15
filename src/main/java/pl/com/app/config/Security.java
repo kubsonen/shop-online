@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.com.app.controller.CategoryController;
+import pl.com.app.controller.ImageController;
 import pl.com.app.controller.IndexController;
 import pl.com.app.service.UserService;
 
@@ -43,6 +44,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 authorizeRequests().
                 antMatchers(IndexController.INDEX_PATH).permitAll().
                 antMatchers(CategoryController.CATEGORY_PATH, CategoryController.CATEGORY_PATH + "/*").permitAll().
+                antMatchers(ImageController.IMAGE_PATH + ImageController.IMAGE_PRODUCT_PATH + "/*").permitAll().
                 antMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll().
                 anyRequest().authenticated().and().formLogin();
     }

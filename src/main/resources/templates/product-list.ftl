@@ -33,14 +33,14 @@
 
             <br>
 
-            <#if categories??>
+            <#if products??>
 
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col"></th>
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Description</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -49,11 +49,16 @@
                     <#list products as product>
 
                         <tr>
-                            <td>${(category.productName)!""}</td>
-                            <td>${(category.price)!""}</td>
-                            <td>${(category.description)!""}</td>
                             <td>
-                                <a class="btn btn-primary" href="#" role="button">Show</a>
+                                <#if product.productThumbNailId??>
+                                    <img src="/image/product/${product.productThumbNailId}" class="img-fluid" width="100" height="100">
+                                </#if>
+                            </td>
+                            <td>${(product.productName)!""}</td>
+                            <td>${(product.price)!""} PLN</td>
+                            <td>
+                                <a class="btn btn-primary" href="/product/${(product.productCode)!''}" role="button">Show</a>
+                                <a class="btn btn-primary" href="#" role="button">Add</a>
                             </td>
                         </tr>
 

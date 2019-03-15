@@ -1,12 +1,12 @@
 package pl.com.app.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.com.app.annotation.InsertConstant;
-import pl.com.app.aspect.ConstantData;
 import pl.com.app.entity.Category;
 import pl.com.app.entity.Product;
 import pl.com.app.model.ImportModel;
@@ -20,6 +20,8 @@ import java.util.Set;
 @RequestMapping(value = CategoryController.CATEGORY_PATH)
 public class CategoryController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+
     public static final String CATEGORY_PATH = "/category";
     public static final String CATEGORY_FORM = "/form";
     public static final String CATEGORY_IMPORT = "/import";
@@ -29,7 +31,6 @@ public class CategoryController {
 
     public static final String SHOW_CATEGORY_CATEGORIES = "categories";
     public static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
-
     public static final String SHOW_PRODUCTS_IN_CATEGORY = "products";
 
     @Autowired
@@ -94,7 +95,6 @@ public class CategoryController {
         } catch (Throwable t){
             t.printStackTrace();
         }
-
 
         if(category != null){
             Set<Product> products = productService.getProductsInCategory(category);
