@@ -28,7 +28,6 @@ public class CategoryController {
     public static final String CATEGORY_ACRONYM_ATTRIBUTE = "acronym";
     public static final String IMPORT_ERROR = "importError";
     public static final String IMPORT_SUCCESS = "importSuccess";
-
     public static final String SHOW_CATEGORY_CATEGORIES = "categories";
     public static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
     public static final String SHOW_PRODUCTS_IN_CATEGORY = "products";

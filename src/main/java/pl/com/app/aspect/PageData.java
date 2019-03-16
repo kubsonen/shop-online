@@ -43,9 +43,7 @@ public class PageData {
                             logger.info("Param added.");
                         }
                     }
-
                     logger.info("Model exists.");
-
                 }
             }
         } catch (ClassCastException e){

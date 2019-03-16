@@ -59,6 +59,9 @@
                             <td>
                                 <a class="btn btn-primary" href="/product/${(product.productCode)!''}" role="button">Show</a>
                                 <a class="btn btn-primary" href="#" role="button">Add</a>
+                                <#if adminLogged?? && adminLogged == true>
+                                    <a class="btn btn-danger" href="/product/delete/${product.id}" role="button">Delete</a>
+                                </#if>
                             </td>
                         </tr>
 

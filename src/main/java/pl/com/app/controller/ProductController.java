@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.com.app.annotation.InsertConstant;
 import pl.com.app.aspect.ConstantData;
 import pl.com.app.entity.Product;
@@ -24,10 +22,13 @@ public class ProductController {
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     public static final String PRODUCT = "product";
+    public static final String DELETE_PATH = "/delete";
     private static final String PRODUCT_FORM = "/form";
     private static final String PRODUCT_ATTRIBUTE = "product";
     private static final String PRODUCT_SAVE_SUCCESS = "productSaveSuccess";
     private static final String PRODUCT_SAVE_FAIL = "productSaveFail";
+    private static final String PRODUCT_DELETE_SUCCESS = "productDeleteSuccess";
+    private static final String PRODUCT_DELETE_FAIL = "productDeleteSuccess";
 
     @Autowired
     private ProductService productService;
@@ -64,6 +65,21 @@ public class ProductController {
         }
 
         return "product-form";
+    }
+
+    @GetMapping(DELETE_PATH + "/{productId}")
+    public String deleteProduct(Model model,
+                                @PathVariable("productId") String productId,
+                                @RequestHeader(value = "referer", required = false) String referer){
+
+        productService.deleteProductById(Long.valueOf(productId));
+
+        if(referer != null){
+            return "redirect:" + referer;
+        }
+
+        return "redirect:/category";
+
     }
 
 

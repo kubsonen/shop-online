@@ -24,7 +24,7 @@ public class Product extends Common{
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "product_image",
         joinColumns = @JoinColumn(name = "product_id"),
         inverseJoinColumns = @JoinColumn(name = "image_id"))
