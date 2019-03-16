@@ -41,12 +41,12 @@
                 </div>
             </#if>
 
-            <form class="mb-3" method="POST" action="/category/import" id="category" >
+            <form class="mb-3" method="POST" action="${importAction}" >
                 <div class="form-group">
                     <label for="importText">Paste your import text</label>
                     <textarea class="form-control" id="importText" name="importText" rows="10"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary my-3">Import categories</button>
+                <button type="submit" class="btn btn-primary my-3">Import ${whatImport}</button>
             </form>
         </div>
 

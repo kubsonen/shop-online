@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -74,6 +75,13 @@ public class Product extends Common{
 
     public void setImages(Set<Image> images) {
         this.images = images;
+    }
+
+    public void addImage(Image image){
+        if(images == null){
+            images = new HashSet<>();
+        }
+        images.add(image);
     }
 
     public String getDescription() {

@@ -14,6 +14,8 @@ import pl.com.app.service.CategoryService;
 import pl.com.app.service.ProductService;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -23,14 +25,22 @@ public class CategoryController {
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     public static final String CATEGORY_PATH = "/category";
-    public static final String CATEGORY_FORM = "/form";
-    public static final String CATEGORY_IMPORT = "/import";
-    public static final String CATEGORY_ACRONYM_ATTRIBUTE = "acronym";
-    public static final String IMPORT_ERROR = "importError";
-    public static final String IMPORT_SUCCESS = "importSuccess";
-    public static final String SHOW_CATEGORY_CATEGORIES = "categories";
-    public static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
-    public static final String SHOW_PRODUCTS_IN_CATEGORY = "products";
+    private static final String CATEGORY_FORM = "/form";
+    private static final String CATEGORY_IMPORT = "/import";
+    private static final String CATEGORY_ACRONYM_ATTRIBUTE = "acronym";
+    private static final String IMPORT_ERROR = "importError";
+    private static final String IMPORT_SUCCESS = "importSuccess";
+    private static final String SHOW_CATEGORY_CATEGORIES = "categories";
+    private static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
+    private static final String SHOW_PRODUCTS_IN_CATEGORY = "products";
+
+    private static final String IMPORT_ACTION = "importAction";
+    private static final String IMPORT_WHAT = "whatImport";
+    private static final Map<String, Object> importParameterMap = new HashMap<>();
+    static {
+        importParameterMap.put(IMPORT_ACTION, CATEGORY_PATH + CATEGORY_IMPORT);
+        importParameterMap.put(IMPORT_WHAT, "categories");
+    }
 
     @Autowired
     private CategoryService categoryService;
@@ -67,12 +77,13 @@ public class CategoryController {
 
     @GetMapping(CATEGORY_IMPORT)
     public String importCategories(Model model){
-        return "category-import";
+        model.addAllAttributes(importParameterMap);
+        return "data-import";
     }
 
     @PostMapping(CATEGORY_IMPORT)
     public String saveImport(ImportModel importModel, Model model){
-
+        model.addAllAttributes(importParameterMap);
         try{
             categoryService.importCategories(importModel.getImportText());
             model.addAttribute(IMPORT_SUCCESS, "Everything ok.");
@@ -81,7 +92,7 @@ public class CategoryController {
             model.addAttribute(IMPORT_ERROR, t.getMessage());
         }
 
-        return "category-import";
+        return "data-import";
     }
 
     @GetMapping("/{categoryAcronym}")

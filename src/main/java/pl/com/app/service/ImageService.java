@@ -6,6 +6,7 @@ import pl.com.app.entity.Image;
 import pl.com.app.repository.ImageRepository;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 /**
  * @author JNartowicz
@@ -18,6 +19,7 @@ public class ImageService {
 
     @Transactional
     public void saveImage(Image image){
+        image.setCreateDate(new Date());
         imageRepository.save(image);
     }
 
