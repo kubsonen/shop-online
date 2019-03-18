@@ -36,14 +36,14 @@ public class PageData {
 
                     for(Authority authority: user.getAuthoritiesSet()){
                         //Add parameters log in admin
-                        logger.info("Authority: " + authority.getAuthority());
+//                        logger.info("Authority: " + authority.getAuthority());
                         if(authority.getAuthority().equals(ADMIN_AUTHORITY)){
                             Model model = (Model) arg;
                             model.addAttribute(LOGGED_IN_ADMIN, true);
-                            logger.info("Param added.");
+//                            logger.info("Param added.");
                         }
                     }
-                    logger.info("Model exists.");
+//                    logger.info("Model exists.");
                 }
             }
         } catch (ClassCastException e){

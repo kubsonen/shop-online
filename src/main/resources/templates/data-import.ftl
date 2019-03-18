@@ -27,7 +27,7 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <h1 class="my-4">
-                <small>Import categories</small>
+                <small>Import ${whatImport}</small>
             </h1>
 
             <#if importError??>

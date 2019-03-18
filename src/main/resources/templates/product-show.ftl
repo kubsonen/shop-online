@@ -28,16 +28,13 @@
         <div class="col-md-8">
 
             <#if product??>
-                <h1 class="mt-4">
-                    <small>${(product.productName)!""}</small>
+                <h1 class="mt-4 mb-2">
+                    <small><b>${(product.productName)!""}</b></small>
                 </h1>
 
-                <br>
-
                 <div class="row my-3">
-                        <div class="text-right mr-3">
-                            <a class="btn btn-primary" href="#" role="button">Add to basket</a>
-                        </div>
+                    <div class="text-right mr-3">
+                        <a class="btn btn-primary" href="#" role="button">Add to basket</a>
                     </div>
                 </div>
                 <!-- Add to basket -->
@@ -45,15 +42,32 @@
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
-                        <#if product.images?? && product.images?size != 0>
-                            <img src="/image/product/${product.images[0].id}" class="img-thumbnail">
+                        <#if showPhoto??>
+                            <img src="/image/product/${showPhoto}" class="img-thumbnail">
+                        <#else>
+                            <#if product.images?? && product.images?size != 0>
+                                <img src="/image/product/${product.images[0].id}" class="img-thumbnail">
+                            </#if>
                         </#if>
                     </div>
                     <div class="col-2"></div>
                 </div>
+
+                <div class="row my-4">
+                    <#if product.images??>
+                        <#list product.images as image>
+                            <div class="col-2">
+                                <a href="?showImg=${image.id}"><img src="/image/product/${image.id}" class="img-thumbnail"></a>
+                            </div>
+                        </#list>
+                    </#if>
+                </div>
                 <!-- Image gallery -->
 
-                <div class="row">
+                <h2 class="my-4">
+                    Description
+                </h2>
+                <div class="row mb-3">
                     <p>
                         ${(product.description)!""}
                     </p>

@@ -43,7 +43,7 @@ public class ConstantData {
 
                     switch (data){
                         case CATEGORIES_DATA:
-                            logger.info("Categories data added.");
+//                            logger.info("Categories data added.");
                             model.addAttribute(CATEGORIES_DATA, categoryService.getAllCategories());
                             break;
                         default:

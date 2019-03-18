@@ -3,9 +3,13 @@
 
     <!-- Basket -->
     <div class="card my-4">
-        <h5 class="card-header">Your basket</h5>
+        <h5 class="card-header">Your basket
+            <#if basketShopAttribute??>
+                <small>${basketShopAttribute.getOrderSum()}</small>
+            </#if>
+        </h5>
         <div class="card-body">
-            <button class="btn btn-secondary w-100" type="button">Go to your basket</button>
+            <a href="/basket" class="btn btn-secondary w-100" type="button">Go to your basket</a>
         </div>
     </div>
 

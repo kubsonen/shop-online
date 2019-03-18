@@ -31,6 +31,7 @@ public class ProductController {
     private static final String PRODUCT_ATTRIBUTE = "product";
     private static final String PRODUCT_SAVE_SUCCESS = "productSaveSuccess";
     private static final String PRODUCT_SAVE_FAIL = "productSaveFail";
+    private static final String PRODUCT_SELECTED_PHOTO = "showPhoto";
 
     private static final String IMPORT_ERROR = "importError";
     private static final String IMPORT_SUCCESS = "importSuccess";
@@ -48,7 +49,12 @@ public class ProductController {
 
     @GetMapping("/{productCode}")
     public String showProduct(Model model,
-                              @PathVariable("productCode") String productCode){
+                              @PathVariable("productCode") String productCode,
+                              @RequestParam(value = "showImg", required = false) String photoId){
+
+        if(photoId != null){
+            model.addAttribute(PRODUCT_SELECTED_PHOTO, photoId);
+        }
 
         Product product = productService.findByProductCode(productCode);
         model.addAttribute(PRODUCT, product);
@@ -113,7 +119,5 @@ public class ProductController {
         }
         return "data-import";
     }
-
-
 
 }

@@ -126,6 +126,7 @@ public class ProductService {
         for(String[] row: importRows){
 
             Product product = new Product();
+            product.setProductCode(Util.generateProductCode());
 
             String categoryId = row[PRODUCT_IMPORT_INDEX_CATEGORY_ID].trim();
             if(!categoryId.isEmpty()){
@@ -174,7 +175,7 @@ public class ProductService {
                     File file;
                     try{
 
-                        URL url = new URL(link);
+                        URL url = new URL(link.trim());
                         inputStream = url.openStream();
                         file = new File(AppConst.PRODUCT_IMG_FILES_PATH + Util.generateImgName());
                         file.createNewFile();
