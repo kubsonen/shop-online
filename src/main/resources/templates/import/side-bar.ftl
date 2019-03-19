@@ -5,7 +5,7 @@
     <div class="card my-4">
         <h5 class="card-header">Your basket
             <#if basketShopAttribute??>
-                <small>${basketShopAttribute.getOrderSum()}</small>
+                ${basketShopAttribute.getOrderSum()}&nbsp;PLN
             </#if>
         </h5>
         <div class="card-body">

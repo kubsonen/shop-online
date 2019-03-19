@@ -2,6 +2,7 @@ package pl.com.app.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -67,4 +68,12 @@ public class Order extends Common {
     public void setPaymentType(Dictionary paymentType) {
         this.paymentType = paymentType;
     }
+
+    public void addProduct(Product product){
+        if(products == null){
+            products = new HashSet<>();
+        }
+        products.add(product);
+    }
+
 }

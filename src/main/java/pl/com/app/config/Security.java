@@ -11,10 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.com.app.controller.CategoryController;
-import pl.com.app.controller.ImageController;
-import pl.com.app.controller.IndexController;
-import pl.com.app.controller.ShopBasketController;
+import pl.com.app.controller.*;
 import pl.com.app.service.UserService;
 
 /**
@@ -47,6 +44,8 @@ public class Security extends WebSecurityConfigurerAdapter {
                 antMatchers(CategoryController.CATEGORY_PATH, CategoryController.CATEGORY_PATH + "/*").permitAll().
                 antMatchers(ImageController.IMAGE_PATH + ImageController.IMAGE_PRODUCT_PATH + "/*").permitAll().
                 antMatchers(ShopBasketController.BASKET_PATH + "").permitAll().
+                antMatchers(ProductController.PRODUCT_PATH + "/*").permitAll().
+                antMatchers(ProductController.PRODUCT_PATH + ProductController.PRODUCT_ADD_TO_BASKET + "/*").permitAll().
                 antMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll().
                 anyRequest().authenticated().and().formLogin();
     }

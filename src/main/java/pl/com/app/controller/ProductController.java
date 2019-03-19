@@ -9,10 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.com.app.annotation.InsertConstant;
 import pl.com.app.aspect.ConstantData;
+import pl.com.app.component.ShopBasket;
 import pl.com.app.entity.Product;
 import pl.com.app.model.ImportModel;
 import pl.com.app.service.ProductService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +28,13 @@ public class ProductController {
     public static final String PRODUCT = "product";
     public static final String PRODUCT_PATH = "/product";
     public static final String DELETE_PATH = "/delete";
-    private static final String PRODUCT_FORM = "/form";
-    private static final String PRODUCT_IMPORT = "/import";
-    private static final String PRODUCT_ATTRIBUTE = "product";
-    private static final String PRODUCT_SAVE_SUCCESS = "productSaveSuccess";
-    private static final String PRODUCT_SAVE_FAIL = "productSaveFail";
-    private static final String PRODUCT_SELECTED_PHOTO = "showPhoto";
+    public static final String PRODUCT_FORM = "/form";
+    public static final String PRODUCT_IMPORT = "/import";
+    public static final String PRODUCT_ATTRIBUTE = "product";
+    public static final String PRODUCT_SAVE_SUCCESS = "productSaveSuccess";
+    public static final String PRODUCT_SAVE_FAIL = "productSaveFail";
+    public static final String PRODUCT_SELECTED_PHOTO = "showPhoto";
+    public static final String PRODUCT_ADD_TO_BASKET = "/addToBasket";
 
     private static final String IMPORT_ERROR = "importError";
     private static final String IMPORT_SUCCESS = "importSuccess";
@@ -43,6 +46,9 @@ public class ProductController {
         importParameterMap.put(IMPORT_ACTION, PRODUCT_PATH + PRODUCT_IMPORT);
         importParameterMap.put(IMPORT_WHAT, "products");
     }
+
+    @Autowired
+    private ShopBasket basket;
 
     @Autowired
     private ProductService productService;
@@ -118,6 +124,22 @@ public class ProductController {
             model.addAttribute(IMPORT_ERROR, t.getMessage());
         }
         return "data-import";
+    }
+
+    @GetMapping(PRODUCT_ADD_TO_BASKET + "/{productCode}")
+    public String addProductToBasket(Model model,
+                                    @PathVariable(value = "productCode") String productCode,
+                                    @RequestHeader(value = "referer", required = false) String referer){
+
+        Product productToAdd = productService.findByProductCode(productCode);
+        basket.getOrder().addProduct(productToAdd);
+
+        if(referer != null){
+            return "redirect:" + referer;
+        } else {
+            return "redirect:/category";
+        }
+
     }
 
 }

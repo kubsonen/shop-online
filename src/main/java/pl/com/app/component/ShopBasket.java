@@ -35,8 +35,13 @@ public class ShopBasket {
 
     public BigDecimal getOrderSum(){
         Set<Product> products = order.getProducts();
+
         if(products != null){
-            return new BigDecimal("0.0");
+            double sum = 0.0;
+            for(Product product: products){
+                sum = sum + product.getPrice().doubleValue();
+            }
+            return new BigDecimal(sum);
         } else {
             return new BigDecimal("0.0");
         }

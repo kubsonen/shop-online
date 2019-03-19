@@ -32,7 +32,7 @@ public class CategoryController {
     private static final String IMPORT_SUCCESS = "importSuccess";
     private static final String SHOW_CATEGORY_CATEGORIES = "categories";
     private static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
-    private static final String SHOW_PRODUCTS_IN_CATEGORY = "products";
+    private static final String SHOW_PRODUCTS_IN_CATEGORY = "productsInCategory";
 
     private static final String IMPORT_ACTION = "importAction";
     private static final String IMPORT_WHAT = "whatImport";

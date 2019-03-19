@@ -27,7 +27,40 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
+                <h1 class="mt-4 mb-2">
+                    <small>Your basket</small>
+                </h1>
 
+                <br>
+
+                <#if productsInBasket??>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Count</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                            <#list productsInBasket as product>
+
+                                <tr>
+                                    <td></td>
+                                    <td>${(prod.productName)!""}</td>
+                                    <td>${(prod.price)!""} PLN</td>
+                                    <td></td>
+                                </tr>
+
+                            </#list>
+
+                        </tbody>
+                    </table>
+
+                </#if>
 
             </div>
             <#include "/import/side-bar.ftl" >

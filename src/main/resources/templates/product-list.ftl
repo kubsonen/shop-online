@@ -27,13 +27,13 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-            <h1 class="my-4">
+            <h1 class="mt-4 mb-2">
                 <small>Browse products</small>
             </h1>
 
             <br>
 
-            <#if products??>
+            <#if productsInCategory??>
 
                 <table class="table">
                     <thead>
@@ -46,21 +46,22 @@
                     </thead>
                     <tbody>
 
-                    <#list products as product>
+                    <#list productsInCategory as prod>
 
                         <tr>
                             <td>
-                                <#if product.productThumbNailId??>
-                                    <img src="/image/product/${product.productThumbNailId}" class="img-fluid" width="100" height="100">
+                                <#if prod.productThumbNailId??>
+                                    <a href="/product/${prod.productCode}">
+                                        <img src="/image/product/${prod.productThumbNailId}" class="img-fluid" width="100" height="100">
+                                    </a>
                                 </#if>
                             </td>
-                            <td>${(product.productName)!""}</td>
-                            <td>${(product.price)!""} PLN</td>
+                            <td>${(prod.productName)!""}</td>
+                            <td>${(prod.price)!""} PLN</td>
                             <td>
-                                <a class="btn btn-primary" href="/product/${(product.productCode)!''}" role="button">Show</a>
-                                <a class="btn btn-primary" href="#" role="button">Add</a>
+                                <a class="btn btn-primary" href="/product/addToBasket/${prod.productCode}" role="button">Add</a>
                                 <#if adminLogged?? && adminLogged == true>
-                                    <a class="btn btn-danger" href="/product/delete/${product.id}" role="button">Delete</a>
+                                    <a class="btn btn-danger" href="/product/delete/${prod.id}" role="button">Delete</a>
                                 </#if>
                             </td>
                         </tr>

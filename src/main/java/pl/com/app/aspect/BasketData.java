@@ -31,8 +31,9 @@ public class BasketData {
             for (Object arg : controllerArgs) {
                 if (arg instanceof Model) {
 
-                      Model model = (Model) arg;
-                      model.addAttribute(BASKET_SHOP_ATTRIBUTE, shopBasket);
+                    shopBasket.getOrderSum();
+                    Model model = (Model) arg;
+                    model.addAttribute(BASKET_SHOP_ATTRIBUTE, shopBasket);
 
                 }
             }
