@@ -231,4 +231,16 @@ public class ProductService {
 
     }
 
+    @Transactional
+    public Set<Product> searchProductByName(String productName){
+        Set<Product> products = productRepository.searchProductByName(productName);
+        for(Product p: products){
+            p.getImages().size();
+            if(!p.getImages().isEmpty()){
+                p.setProductThumbNailId(p.getImages().iterator().next().getId().toString());
+            }
+        }
+        return products;
+    }
+
 }

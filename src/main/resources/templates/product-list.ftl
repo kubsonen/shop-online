@@ -31,9 +31,15 @@
                 <small>Browse products</small>
             </h1>
 
+            <#if searchCaption??>
+                <h3 class="mt-4 mb-2">
+                    <small><b>Search result for:</b>&nbsp;${searchCaption}</small>
+                </h3>
+            </#if>
+
             <br>
 
-            <#if productsInCategory??>
+            <#if productsInPage??>
 
                 <table class="table">
                     <thead>
@@ -46,7 +52,7 @@
                     </thead>
                     <tbody>
 
-                    <#list productsInCategory as prod>
+                    <#list productsInPage as prod>
 
                         <tr>
                             <td>

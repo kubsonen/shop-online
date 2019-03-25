@@ -25,17 +25,17 @@ public class CategoryController {
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     public static final String CATEGORY_PATH = "/category";
-    private static final String CATEGORY_FORM = "/form";
-    private static final String CATEGORY_IMPORT = "/import";
-    private static final String CATEGORY_ACRONYM_ATTRIBUTE = "acronym";
-    private static final String IMPORT_ERROR = "importError";
-    private static final String IMPORT_SUCCESS = "importSuccess";
-    private static final String SHOW_CATEGORY_CATEGORIES = "categories";
-    private static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
-    private static final String SHOW_PRODUCTS_IN_CATEGORY = "productsInCategory";
+    public static final String CATEGORY_FORM = "/form";
+    public static final String CATEGORY_IMPORT = "/import";
+    public static final String CATEGORY_ACRONYM_ATTRIBUTE = "acronym";
+    public static final String IMPORT_ERROR = "importError";
+    public static final String IMPORT_SUCCESS = "importSuccess";
+    public static final String SHOW_CATEGORY_CATEGORIES = "categories";
+    public static final String SHOW_CATEGORY_CATEGORY_PARENT = "categoryParent";
+    public static final String SHOW_PRODUCTS_IN_PAGE = "productsInPage";
+    public static final String IMPORT_ACTION = "importAction";
+    public static final String IMPORT_WHAT = "whatImport";
 
-    private static final String IMPORT_ACTION = "importAction";
-    private static final String IMPORT_WHAT = "whatImport";
     private static final Map<String, Object> importParameterMap = new HashMap<>();
     static {
         importParameterMap.put(IMPORT_ACTION, CATEGORY_PATH + CATEGORY_IMPORT);
@@ -108,7 +108,7 @@ public class CategoryController {
 
         if(category != null){
             Set<Product> products = productService.getProductsInCategory(category);
-            model.addAttribute(SHOW_PRODUCTS_IN_CATEGORY, products);
+            model.addAttribute(SHOW_PRODUCTS_IN_PAGE, products);
         }
 
         return "product-list";

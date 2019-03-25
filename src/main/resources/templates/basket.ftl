@@ -49,10 +49,14 @@
                             <#list productsInBasket as product>
 
                                 <tr>
-                                    <td></td>
-                                    <td>${(prod.productName)!""}</td>
-                                    <td>${(prod.price)!""} PLN</td>
-                                    <td></td>
+                                    <td>${(product.productName)!""}</td>
+                                    <td>${(product.price)!""} PLN</td>
+                                    <td>${(product.countInBasket)!""}</td>
+                                    <td>
+                                        <a class="btn btn-primary" href="/product/addOnePieceFromBasket/${(product.productCode)!''}" role="button">+</a>
+                                        <a class="btn btn-danger" href="/product/deleteOnePieceFromBasket/${(product.productCode)!''}" role="button">-</a>
+                                        <a class="btn btn-danger" href="/product/deleteProductFromBasket/${(product.productCode)!''}" role="button">Delete</a>
+                                    </td>
                                 </tr>
 
                             </#list>

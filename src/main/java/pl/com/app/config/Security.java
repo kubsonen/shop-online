@@ -46,6 +46,9 @@ public class Security extends WebSecurityConfigurerAdapter {
                 antMatchers(ShopBasketController.BASKET_PATH + "").permitAll().
                 antMatchers(ProductController.PRODUCT_PATH + "/*").permitAll().
                 antMatchers(ProductController.PRODUCT_PATH + ProductController.PRODUCT_ADD_TO_BASKET + "/*").permitAll().
+                antMatchers(ProductController.PRODUCT_PATH + ProductController.PRODUCT_ADD_ONE_PIECE_FROM_BASKET + "/*").permitAll().
+                antMatchers(ProductController.PRODUCT_PATH + ProductController.PRODUCT_DELETE_ONE_PIECE_FROM_BASKET + "/*").permitAll().
+                antMatchers(ProductController.PRODUCT_PATH + ProductController.PRODUCT_DELETE_PRODUCT_FROM_BASKET + "/*").permitAll().
                 antMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll().
                 anyRequest().authenticated().and().formLogin();
     }

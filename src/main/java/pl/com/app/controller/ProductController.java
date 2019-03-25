@@ -35,6 +35,12 @@ public class ProductController {
     public static final String PRODUCT_SAVE_FAIL = "productSaveFail";
     public static final String PRODUCT_SELECTED_PHOTO = "showPhoto";
     public static final String PRODUCT_ADD_TO_BASKET = "/addToBasket";
+    public static final String PRODUCT_SEARCH = "/searchProduct";
+    public static final String PRODUCT_SEARCH_CAPTION = "searchCaption";
+
+    public static final String PRODUCT_ADD_ONE_PIECE_FROM_BASKET = "/addOnePieceFromBasket";
+    public static final String PRODUCT_DELETE_ONE_PIECE_FROM_BASKET = "/deleteOnePieceFromBasket";
+    public static final String PRODUCT_DELETE_PRODUCT_FROM_BASKET = "/deleteProductFromBasket";
 
     private static final String IMPORT_ERROR = "importError";
     private static final String IMPORT_SUCCESS = "importSuccess";
@@ -134,6 +140,54 @@ public class ProductController {
         Product productToAdd = productService.findByProductCode(productCode);
         basket.getOrder().addProduct(productToAdd);
 
+        if(referer != null){
+            return "redirect:" + referer;
+        } else {
+            return "redirect:/category";
+        }
+    }
+
+    @PostMapping(PRODUCT_SEARCH)
+    public String productSearch(Model model, @ModelAttribute("search-field") String filterSearch){
+        model.addAttribute(PRODUCT_SEARCH_CAPTION, filterSearch);
+        model.addAttribute(CategoryController.SHOW_PRODUCTS_IN_PAGE, productService.searchProductByName(filterSearch));
+        return "product-list";
+    }
+
+    @GetMapping(PRODUCT_DELETE_ONE_PIECE_FROM_BASKET + "/{productCode}")
+    public String deleteOnePieceFromBasket(Model model,
+                                           @PathVariable(value = "productCode") String productCode,
+                                           @RequestHeader(value = "referer", required = false) String referer){
+
+        basket.deleteProduct(productCode, true);
+        if(referer != null){
+            return "redirect:" + referer;
+        } else {
+            return "redirect:/category";
+        }
+
+    }
+
+    @GetMapping(PRODUCT_ADD_ONE_PIECE_FROM_BASKET + "/{productCode}")
+    public String addOnePieceFromBasket(Model model,
+                                        @PathVariable(value = "productCode") String productCode,
+                                        @RequestHeader(value = "referer", required = false) String referer){
+
+        basket.addProduct(productCode);
+        if(referer != null){
+            return "redirect:" + referer;
+        } else {
+            return "redirect:/category";
+        }
+
+    }
+
+    @GetMapping(PRODUCT_DELETE_PRODUCT_FROM_BASKET + "/{productCode}")
+    public String deletePRoductFromBasket(Model model,
+                                          @PathVariable(value = "productCode") String productCode,
+                                          @RequestHeader(value = "referer", required = false) String referer){
+
+        basket.deleteProduct(productCode, false);
         if(referer != null){
             return "redirect:" + referer;
         } else {

@@ -45,6 +45,9 @@ public class Product extends Common{
     @Transient
     private String productThumbNailId;
 
+    @Transient
+    private Integer countInBasket;
+
     public String getProductCode() {
         return productCode;
     }
@@ -114,5 +117,21 @@ public class Product extends Common{
 
     public void setProductThumbNailId(String productThumbNailId) {
         this.productThumbNailId = productThumbNailId;
+    }
+
+    public Integer getCountInBasket() {
+        return countInBasket;
+    }
+
+    public void addCountInBasket(){
+        if(countInBasket == null){
+            countInBasket = 1;
+        } else {
+            countInBasket++;
+        }
+    }
+
+    public void setCountInBasket(Integer countInBasket) {
+        this.countInBasket = countInBasket;
     }
 }

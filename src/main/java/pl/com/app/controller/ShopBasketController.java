@@ -12,12 +12,14 @@ import pl.com.app.component.ShopBasket;
 public class ShopBasketController {
 
     public static final String BASKET_PATH = "/basket";
+    public static final String PRODUCTS_IN_BASKET = "productsInBasket";
 
     @Autowired
     private ShopBasket shopBasket;
 
     @GetMapping
     public String showBasket(Model model){
+        model.addAttribute(PRODUCTS_IN_BASKET, shopBasket.getProductInBasket());
         return "basket";
     }
 

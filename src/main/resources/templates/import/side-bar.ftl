@@ -15,14 +15,15 @@
 
     <!-- Search Widget -->
     <div class="card my-4">
-        <h5 class="card-header">Search</h5>
+        <h5 class="card-header">Search your product</h5>
         <div class="card-body">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-            </div>
+            <form action="/product/searchProduct" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search-field" id="search-field" placeholder="Search for...">
+                    <span class="input-group-btn"></span>
+                    <button type="submit" class="btn btn-secondary" type="button">Go!</button>
+                </div>
+            </form>
         </div>
     </div>
 
