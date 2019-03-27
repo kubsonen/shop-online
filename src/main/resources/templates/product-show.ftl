@@ -34,7 +34,7 @@
 
                 <div class="row my-3">
                     <div class="text-right mr-3">
-                        <a class="btn btn-primary" href="#" role="button">Add to basket</a>
+                        <a class="btn btn-primary" href="/product/addToBasket/${(product.productCode)!''}" role="button">Add to basket</a>
                     </div>
                 </div>
                 <!-- Add to basket -->

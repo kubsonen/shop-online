@@ -16,5 +16,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     Product findByProductCode(String productCode);
     @Query("select p from Product p where p.productName like CONCAT('%',:productName,'%')")
     Set<Product> searchProductByName(@Param("productName") String productName);
+    Set<Product> findTop3ByOrderByViewTimesDesc();
 
 }

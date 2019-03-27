@@ -28,12 +28,15 @@
             <div class="col-md-8">
 
                 <h1 class="mt-4 mb-2">
-                    <small>Your basket</small>
+                    Your basket
+                    <#if !productsInBasket?? || productsInBasket?size=0>
+                        is empty.
+                    </#if>
                 </h1>
 
                 <br>
 
-                <#if productsInBasket??>
+                <#if productsInBasket?? && productsInBasket?size!=0>
 
                     <table class="table">
                         <thead>

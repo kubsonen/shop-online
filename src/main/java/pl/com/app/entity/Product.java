@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +32,9 @@ public class Product extends Common{
         inverseJoinColumns = @JoinColumn(name = "image_id"))
     private Set<Image> images;
 
+    @Column(name = "short_description")
+    private String shortDescription;
+
     @Column(name = "description")
     private String description;
 
@@ -38,6 +42,12 @@ public class Product extends Common{
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Column(name = "views")
+    private Integer viewTimes;
+
+    @Column(name = "last_view_date")
+    private Date lastViewDate;
 
     @Transient
     private List<MultipartFile> tempFiles;
@@ -87,6 +97,14 @@ public class Product extends Common{
         images.add(image);
     }
 
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -101,6 +119,22 @@ public class Product extends Common{
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Integer getViewTimes() {
+        return viewTimes;
+    }
+
+    public void setViewTimes(Integer viewTimes) {
+        this.viewTimes = viewTimes;
+    }
+
+    public Date getLastViewDate() {
+        return lastViewDate;
+    }
+
+    public void setLastViewDate(Date lastViewDate) {
+        this.lastViewDate = lastViewDate;
     }
 
     public List<MultipartFile> getTempFiles() {

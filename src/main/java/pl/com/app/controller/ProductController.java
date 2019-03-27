@@ -14,7 +14,6 @@ import pl.com.app.entity.Product;
 import pl.com.app.model.ImportModel;
 import pl.com.app.service.ProductService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +62,13 @@ public class ProductController {
     public String showProduct(Model model,
                               @PathVariable("productCode") String productCode,
                               @RequestParam(value = "showImg", required = false) String photoId){
+
+        try{
+            productService.addProductView(productCode);
+        } catch (Throwable t){
+            t.printStackTrace();
+            logger.info("Cannot add view time to product.");
+        }
 
         if(photoId != null){
             model.addAttribute(PRODUCT_SELECTED_PHOTO, photoId);

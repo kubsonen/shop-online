@@ -79,6 +79,14 @@
                         </#list>
                     </div>
                     <div class="col-md-12 my-2">
+                        <@spring.bind "product.shortDescription" />
+                        <label for="description">Paste your product short description</label>
+                        <textarea class="form-control" id="shortDescription" name="shortDescription" rows="5">${spring.status.value?default("")}</textarea>
+                        <#list spring.status.errorMessages as error>
+                            <p class="text-danger">${error}</p>
+                        </#list>
+                    </div>
+                    <div class="col-md-12 my-2">
                         <@spring.bind "product.description" />
                         <label for="description">Paste your product description</label>
                         <textarea class="form-control" id="description" name="description" rows="5">${spring.status.value?default("")}</textarea>

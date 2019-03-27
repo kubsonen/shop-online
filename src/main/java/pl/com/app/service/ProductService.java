@@ -13,7 +13,6 @@ import pl.com.app.repository.ProductRepository;
 import pl.com.app.util.AppConst;
 import pl.com.app.util.Import;
 import pl.com.app.util.Util;
-import sun.nio.ch.IOUtil;
 
 import javax.transaction.Transactional;
 import java.io.*;
@@ -60,15 +59,7 @@ public class ProductService {
         Set<Category> categories = new HashSet<>();
         categoryService.getSubCategories(category, categories);
         Set<Product> products = productRepository.findByCategoryIn(categories);
-
-        for(Product product: products){
-            Set<Image> images = product.getImages();
-            images.size();
-            if(!images.isEmpty()){
-                product.setProductThumbNailId(images.iterator().next().getId().toString());
-            }
-        }
-
+        setProductThumbnail(products);
         return products;
     }
 
@@ -241,6 +232,35 @@ public class ProductService {
             }
         }
         return products;
+    }
+
+    @Transactional
+    public void addProductView(String productCode){
+        Product product = findByProductCode(productCode);
+        Integer t = product.getViewTimes() + 1;
+        product.setViewTimes(t);
+        product.setLastViewDate(new Date());
+    }
+
+    @Transactional
+    public Set<Product> findTop3MostViewedProducts(){
+        Set<Product> products = productRepository.findTop3ByOrderByViewTimesDesc();
+        setProductThumbnail(products);
+        return products;
+    }
+
+    private void setProductThumbnail(Collection<Product> products){
+        for(Product product: products){
+            setProductThumbnail(product);
+        }
+    }
+
+    private void setProductThumbnail(Product product){
+        Set<Image> images = product.getImages();
+        images.size();
+        if(!images.isEmpty()){
+            product.setProductThumbNailId(images.iterator().next().getId().toString());
+        }
     }
 
 }
