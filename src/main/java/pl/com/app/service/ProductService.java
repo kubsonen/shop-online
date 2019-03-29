@@ -212,11 +212,13 @@ public class ProductService {
 
         //Save all images
         for(Image image: imagesToSave){
+            Thread.sleep(10);
             imageService.saveImage(image);
         }
 
         //Save all products
         for(Product product: productsToSave){
+            Thread.sleep(10);
             productRepository.save(product);
         }
 
@@ -260,6 +262,17 @@ public class ProductService {
         images.size();
         if(!images.isEmpty()){
             product.setProductThumbNailId(images.iterator().next().getId().toString());
+        }
+    }
+
+    @Transactional
+    public Long getProductThumbImgId(String productCode){
+        Product product = findByProductCode(productCode);
+        int i = product.getImages().size();
+        if(i > 0) {
+            return product.getImages().iterator().next().getId();
+        } else {
+            return null;
         }
     }
 

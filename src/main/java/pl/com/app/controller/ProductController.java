@@ -7,13 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.com.app.App;
 import pl.com.app.annotation.InsertConstant;
 import pl.com.app.aspect.ConstantData;
 import pl.com.app.component.ShopBasket;
 import pl.com.app.entity.Product;
 import pl.com.app.model.ImportModel;
+import pl.com.app.model.LastProductCookie;
+import pl.com.app.model.ShopCookie;
 import pl.com.app.service.ProductService;
+import pl.com.app.util.AppConst;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +66,9 @@ public class ProductController {
 
     @GetMapping("/{productCode}")
     public String showProduct(Model model,
+                              HttpServletResponse response,
                               @PathVariable("productCode") String productCode,
+                              @CookieValue(value = AppConst.COOKIE_SHOP_ONLINE_LAST_PRODUCTS, required = false) String lastProductsCookie,
                               @RequestParam(value = "showImg", required = false) String photoId){
 
         try{
@@ -76,6 +84,9 @@ public class ProductController {
 
         Product product = productService.findByProductCode(productCode);
         model.addAttribute(PRODUCT, product);
+        LastProductCookie.handleLastProductCookie(response, lastProductsCookie,
+                AppConst.COOKIE_SHOP_ONLINE_LAST_PRODUCTS, AppConst.COOKIE_MAX_AGE_LAST_PRODUCTS, AppConst.MAX_LAST_VIEW_PRODUCTS, product);
+
         return "product-show";
     }
 

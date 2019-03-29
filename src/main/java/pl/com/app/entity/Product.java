@@ -1,5 +1,6 @@
 package pl.com.app.entity;
 
+import com.google.gson.annotations.Expose;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -15,9 +16,11 @@ import java.util.Set;
 @Table(name = "product")
 public class Product extends Common{
 
+    @Expose
     @Column(name = "product_code")
     private String productCode;
 
+    @Expose
     @NotEmpty
     @Column(name = "product_name")
     private String productName;

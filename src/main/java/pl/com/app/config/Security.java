@@ -43,6 +43,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 antMatchers(IndexController.INDEX_PATH).permitAll().
                 antMatchers(CategoryController.CATEGORY_PATH, CategoryController.CATEGORY_PATH + "/*").permitAll().
                 antMatchers(ImageController.IMAGE_PATH + ImageController.IMAGE_PRODUCT_PATH + "/*").permitAll().
+                antMatchers(ImageController.IMAGE_PATH + ImageController.IMAGE_PRODUCT_THUMB_PATH + "/*").permitAll().
                 antMatchers(ShopBasketController.BASKET_PATH + "").permitAll().
                 antMatchers(ProductController.PRODUCT_PATH + "/*").permitAll().
                 antMatchers(ProductController.PRODUCT_PATH + ProductController.PRODUCT_ADD_TO_BASKET + "/*").permitAll().

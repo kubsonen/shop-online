@@ -74,6 +74,7 @@
                 </div>
                 <!-- Description -->
             </#if>
+
         </div>
 
     <#include "/import/side-bar.ftl" >

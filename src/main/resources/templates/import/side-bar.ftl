@@ -27,74 +27,55 @@
         </div>
     </div>
 
-    <!-- Most viewed categories -->
-    <div class="card my-4">
-        <h5 class="card-header">Most viewed categories</h5>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#">Web Design</a>
-                        </li>
-                        <li>
-                            <a href="#">HTML</a>
-                        </li>
-                        <li>
-                            <a href="#">Freebies</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#">JavaScript</a>
-                        </li>
-                        <li>
-                            <a href="#">CSS</a>
-                        </li>
-                        <li>
-                            <a href="#">Tutorials</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Recently viewed products -->
-    <div class="card my-4">
-        <h5 class="card-header">Last viewed products</h5>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#">Web Design</a>
-                        </li>
-                        <li>
-                            <a href="#">HTML</a>
-                        </li>
-                        <li>
-                            <a href="#">Freebies</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#">JavaScript</a>
-                        </li>
-                        <li>
-                            <a href="#">CSS</a>
-                        </li>
-                        <li>
-                            <a href="#">Tutorials</a>
-                        </li>
-                    </ul>
+    <#if lastProductsViewed?? && lastProductsViewed?size != 0>
+        <div class="card my-4">
+            <h5 class="card-header">Last viewed products</h5>
+            <div class="card-body" style="padding: 0px;">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <#list lastProductsViewed as product>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" alt="First slide [800x400]" src="/image/productThumb/${(product.productCode)!''}" data-holder-rendered="true">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>First slide label</h5>
+                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                </div>
+                            </div>
+                        </#list>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </#if>
+
+    <!-- Most viewed categories -->
+    <#if mostViewCategories?? && mostViewCategories?size != 0>
+        <div class="card my-4">
+            <h5 class="card-header">Most viewed categories</h5>
+            <div class="card-body">
+                <div class="row">
+                    <#list mostViewCategories as category>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="/category/${(category.acronym)!''}">${(category.name)!""}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </#list>
+                </div>
+            </div>
+        </div>
+    </#if>
+
 
 </div>

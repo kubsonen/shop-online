@@ -1,5 +1,7 @@
 package pl.com.app.entity;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -7,10 +9,12 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "category")
 public class Category extends Common{
 
+    @Expose
     @NotEmpty(message = "Must be not empty.")
     @Column(name = "acronym")
     private String acronym;
 
+    @Expose
     @NotEmpty(message = "Must be not empty.")
     @Column(name = "name")
     private String name;
@@ -25,6 +29,10 @@ public class Category extends Common{
 
     @Transient
     private String parentId;
+
+    @Expose
+    @Transient
+    private int countOfVisit;
 
     public String getAcronym() {
         return acronym;
@@ -64,5 +72,14 @@ public class Category extends Common{
 
     public void setParentId(String parentId) {
         this.parentId = parentId;
+    }
+
+
+    public int getCountOfVisit() {
+        return countOfVisit;
+    }
+
+    public void setCountOfVisit(int countOfVisit) {
+        this.countOfVisit = countOfVisit;
     }
 }

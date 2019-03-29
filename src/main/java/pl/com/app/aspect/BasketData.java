@@ -23,7 +23,7 @@ public class BasketData {
     @Before("execution(* pl.com.app.controller.*.*(..))")
     public void before(JoinPoint joinPoint){
 
-        logger.info("Getting shop basket.");
+//        logger.info("Getting shop basket.");
 
         try {
             //Get application user
@@ -38,7 +38,7 @@ public class BasketData {
                 }
             }
         } catch (ClassCastException e){
-            logger.info("Not found user in context.");
+//            logger.info("Not found user in context.");
         } catch (Throwable t){
             logger.info("Problem with adding params to model.");
             t.printStackTrace();

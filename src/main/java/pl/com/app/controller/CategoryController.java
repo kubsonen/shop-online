@@ -1,7 +1,5 @@
 package pl.com.app.controller;
 
-import com.google.gson.Gson;
-import com.sun.deploy.net.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import pl.com.app.entity.Category;
 import pl.com.app.entity.Product;
 import pl.com.app.model.ImportModel;
-import pl.com.app.model.ShopCookie;
+import pl.com.app.model.MostVisitCategoryCookie;
 import pl.com.app.service.CategoryService;
 import pl.com.app.service.ProductService;
 import pl.com.app.util.AppConst;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -59,7 +53,6 @@ public class CategoryController {
 
     @GetMapping
     public String showCategory(Model model,
-                               @CookieValue(value = AppConst.COOKIE_SHOP_ONLINE, required = false) String cookie,
                                @RequestParam(value = CATEGORY_ACRONYM_ATTRIBUTE, required = false) String acronym){
 
         Category parent = null;
@@ -108,7 +101,9 @@ public class CategoryController {
 
     @GetMapping("/{categoryAcronym}")
     public String showProductsInCategory(Model model,
-                                         @PathVariable("categoryAcronym") String categoryAcronym){
+                                         HttpServletResponse response,
+                                         @PathVariable("categoryAcronym") String categoryAcronym,
+                                         @CookieValue(value = AppConst.COOKIE_SHOP_ONLINE_THE_MOST_VISITED_CATEGORIES, required = false) String mostVisitCategoryCookie){
 
         Category category = null;
         try{
@@ -121,6 +116,9 @@ public class CategoryController {
             Set<Product> products = productService.getProductsInCategory(category);
             model.addAttribute(SHOW_PRODUCTS_IN_PAGE, products);
         }
+
+        MostVisitCategoryCookie.handleMostVisitCategoryCookie(response, mostVisitCategoryCookie, AppConst.COOKIE_SHOP_ONLINE_THE_MOST_VISITED_CATEGORIES,
+                AppConst.COOKIE_MAX_AGE_THE_MOST_VISITED_CATEGORIES, AppConst.MAX_MOST_VISITED_CATEGORIES, category);
 
         return "product-list";
     }
